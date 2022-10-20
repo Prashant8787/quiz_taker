@@ -124,7 +124,11 @@ app.get("/check", (req, res) => {
 });
 
 if(process.env.NODE_ENV === "production"){
-  app.use(express.static("quiz-tracker/build"))
+  app.use(express.static("quiz-tracker/build"));
+  const path = reuire("path");
+  app.get("*",(req,res)=>{
+    res.sendFile(path.resolve(__dirname, 'quiz-tracker', 'build', 'index.html'));
+  })
 }
 app.listen(port, () => {
   console.log("server is listenling port no. 4000");
