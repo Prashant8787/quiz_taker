@@ -123,10 +123,11 @@ app.get("/check", (req, res) => {
   res.send("hello everyone");
 });
 
-if(process.env.NODE_ENV === "production"){
-  app.use(express.static("quiz-tracker/build"));
-  const path = reuire("path");
-  app.get("*",(req,res)=>{
+if(process.env.NODE_ENV === 'production'){
+  
+  const path = require("path");
+  app.get("/",(req,res)=>{
+    app.use(express.static(path.resolve(__dirname, 'quiz-tracker', 'build')));
     res.sendFile(path.resolve(__dirname, 'quiz-tracker', 'build', 'index.html'));
   })
 }
